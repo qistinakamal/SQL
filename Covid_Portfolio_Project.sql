@@ -69,7 +69,7 @@ select sum(cast (icu_patients as int)) as total_icu_patients, sum(cast (icu_pati
 from dbo.CovidDeath$
 where location = 'Malaysia'
 
---looking at total of patients total patients admission due to Covid-19
+--looking at total of patients admission due to Covid-19
 select sum(cast(hosp_patients as int)) as total_hosp_patients, sum(cast (hosp_patients as int))/sum(new_cases) as hosp_percentage
 from dbo.CovidDeath$
 where location = 'Malaysia'
