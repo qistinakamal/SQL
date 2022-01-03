@@ -1,4 +1,4 @@
-# mysql
+# sql
 This is my first Structured Query Language project. 
 
 This dataset obtain from https://ourworldindata.org/covid-deaths which I learn from Alex Freberg youtube channel. The dataset use for this project is from 1st January 2020 to 25th November 2021.
