@@ -1,0 +1,46 @@
+-- These datasets were obtained from Kaggle.com. The datasets are about the olympics games over the past 120 years.
+-- I am doing data cleaning using SQL Server
+-- Clean dataset will are ready for further data exploration and visualization using Power BI
+
+-- create database
+create database Olympics
+
+use Olympics
+
+
+-- look at the datasets
+select *
+from dbo.athlete_events$
+
+
+-- to understand datatypes
+sp_help athlete_events$
+
+-- Age will be categorise by different classes
+-- Games variable contain two sets of data which are year and season 
+-- eg: '1906 Summer', '1906' will input into new column call year
+-- 'Summer' will be in a column call season 
+-- Medal have some data written as 'N/A' which I assign as 'Not Applicable'
+select id, name as athelete_name, sex,
+	case 
+		when age < 25 then 'Below 25'
+		when age between 25 and 30 then '25-30'
+		when age > 30 then 'Above 30'
+	end as age_group,
+height, 
+weight, 
+noc as code_region,
+-- I am using charindex to read the length of data 
+CHARINDEX(' ',games)-1 as example1,
+CHARINDEX(' ',reverse(games))-1 as example2,
+left(games,CHARINDEX(' ',games)-1) as year,
+right(games,CHARINDEX(' ',reverse(games))-1) as season,
+city,
+sport,
+event,
+case
+	when medal='NA' then 'Not Applicable' 
+	else medal
+	end as medal
+from dbo.athlete_events$
+where right(games,CHARINDEX(' ',reverse(games))-1) = 'Summer'
